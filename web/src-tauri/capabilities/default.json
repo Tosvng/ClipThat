@@ -1,0 +1,57 @@
+{
+  "$schema": "../gen/schemas/desktop-schema.json",
+  "identifier": "default",
+  "description": "enables the default permissions",
+  "windows": ["main"],
+  "permissions": [
+    "core:default",
+    "core:path:default",
+    "core:event:default",
+    "core:window:default",
+    "core:app:default",
+    "core:resources:default",
+    "core:menu:default",
+    "core:tray:default",
+    "dialog:allow-open",
+    "dialog:allow-save",
+    "fs:default",
+
+    {
+      "identifier": "fs:allow-exists",
+      "allow": [{ "path": "$APPDATA/*" }, { "path": "$DOCUMENT/*" }]
+    },
+    {
+      "identifier": "fs:allow-mkdir",
+      "allow": [{ "path": "$APPDATA/*" }, { "path": "$DOCUMENT/*" }]
+    },
+    {
+      "identifier": "fs:write-all",
+      "allow": [{ "path": "$DOCUMENT/Clip-That/*" }]
+    },
+    {
+      "identifier": "fs:read-all",
+      "allow": [{ "path": "$DOCUMENT/Clip-That/*" }]
+    },
+    "shell:allow-open",
+    {
+      "identifier": "shell:allow-execute",
+      "allow": [
+        {
+          "args": [
+            {
+              "validator": "[\\s\\S]*"
+            },
+            {
+              "validator": "[\\s\\S]*"
+            },
+            {
+              "validator": "[\\s\\S]*"
+            }
+          ],
+          "name": "C:/Users/altos/Documents/ClipThat/dist/clip_that_script",
+          "sidecar": true
+        }
+      ]
+    }
+  ]
+}

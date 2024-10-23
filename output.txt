@@ -1,0 +1,44 @@
+MoviePy - Writing audio in C:\Users\altos\AppData\Local\Temp\tmp8y6gxs9l.wav
+MoviePy - Done.
+Moviepy - Building video clip_1.mp4.
+MoviePy - Writing audio in clip_1TEMP_MPY_wvf_snd.mp3
+MoviePy - Done.
+Moviepy - Writing video clip_1.mp4
+
+Moviepy - Done !
+Moviepy - video ready clip_1.mp4
+Moviepy - Building video clip_2.mp4.
+MoviePy - Writing audio in clip_2TEMP_MPY_wvf_snd.mp3
+MoviePy - Done.
+Moviepy - Writing video clip_2.mp4
+
+Moviepy - Done !
+Moviepy - video ready clip_2.mp4
+Moviepy - Building video clip_3.mp4.
+MoviePy - Writing audio in clip_3TEMP_MPY_wvf_snd.mp3
+MoviePy - Done.
+Moviepy - Writing video clip_3.mp4
+
+Moviepy - Done !
+Moviepy - video ready clip_3.mp4
+Moviepy - Building video clip_4.mp4.
+MoviePy - Writing audio in clip_4TEMP_MPY_wvf_snd.mp3
+MoviePy - Done.
+Moviepy - Writing video clip_4.mp4
+
+Moviepy - Done !
+Moviepy - video ready clip_4.mp4
+Moviepy - Building video clip_5.mp4.
+MoviePy - Writing audio in clip_5TEMP_MPY_wvf_snd.mp3
+MoviePy - Done.
+Moviepy - Writing video clip_5.mp4
+
+Moviepy - Done !
+Moviepy - video ready clip_5.mp4
+Moviepy - Building video clip_6.mp4.
+MoviePy - Writing audio in clip_6TEMP_MPY_wvf_snd.mp3
+MoviePy - Done.
+Moviepy - Writing video clip_6.mp4
+
+Moviepy - Done !
+Moviepy - video ready clip_6.mp4
