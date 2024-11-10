@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { open } from "@tauri-apps/plugin-dialog";
-import { exists, mkdir, create } from "@tauri-apps/plugin-fs";
+import { exists, mkdir, create, readDir } from "@tauri-apps/plugin-fs";
 
 const useFolderHook = () => {
   // Allow a user select a folder
@@ -29,7 +29,20 @@ const useFolderHook = () => {
       return false;
     }
   };
-  return { createFolder, selectFolder };
+
+  // Read a folder
+  const readDirectory = async ({ basePath, path }) => {
+    try {
+      const entries = await readDir(path, {
+        baseDir: basePath,
+      });
+      return entries;
+    } catch (e) {
+      console.log(e);
+      return;
+    }
+  };
+  return { createFolder, selectFolder, readDirectory };
 };
 
 export default useFolderHook;

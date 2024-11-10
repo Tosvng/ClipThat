@@ -14,6 +14,14 @@
     "core:tray:default",
     "dialog:allow-open",
     "dialog:allow-save",
+    "dialog:default",
+    "dialog:allow-ask",
+    "dialog:allow-message",
+    "updater:default",
+    "updater:allow-check",
+    "updater:allow-download-and-install",
+    "process:default",
+    "process:allow-restart",
     "fs:default",
 
     {
@@ -31,6 +39,10 @@
     {
       "identifier": "fs:read-all",
       "allow": [{ "path": "$DOCUMENT/Clip-That/*" }]
+    },
+    {
+      "identifier": "fs:allow-app-read-recursive",
+      "allow": [{ "path": "$DOCUMENT/Clip-That" }]
     },
     "shell:allow-open",
     {

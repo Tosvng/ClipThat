@@ -35,7 +35,7 @@ const useFileHook = () => {
     }
   };
 
-  const readFile = async ({ basePath, filepath }) => {
+  const readTextFile = async ({ basePath, filepath }) => {
     try {
       const fileContent = await readTextFile(filepath, {
         baseDir: basePath,
@@ -46,7 +46,20 @@ const useFileHook = () => {
     }
   };
 
-  return { selectFile, checkIfFileExists, createFile, readFile };
+  const readFile = async ({ basePath, filepath }) => {
+    try {
+      const fileContent = await readFile(filepath, {
+        baseDir: basePath,
+      });
+      console.log(basePath, filepath);
+      return fileContent;
+    } catch (e) {
+      console.log(e);
+      return false;
+    }
+  };
+
+  return { selectFile, checkIfFileExists, createFile, readTextFile, readFile };
 };
 
 export default useFileHook;

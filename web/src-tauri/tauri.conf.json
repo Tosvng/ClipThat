@@ -1,7 +1,7 @@
 {
   "$schema": "../node_modules/@tauri-apps/cli/config.schema.json",
   "productName": "clip-that",
-  "version": "0.1.0",
+  "version": "0.2.1",
   "identifier": "com.example.tauri",
   "build": {
     "frontendDist": "../dist",
@@ -25,6 +25,7 @@
   },
   "bundle": {
     "active": true,
+    "createUpdaterArtifacts": true,
     "targets": "all",
     "externalBin": ["C:/Users/altos/Documents/ClipThat/dist/clip_that_script"],
     "icon": [
@@ -34,5 +35,13 @@
       "icons/icon.icns",
       "icons/icon.ico"
     ]
+  },
+  "plugins": {
+    "updater": {
+      "pubkey": "dW50cnVzdGVkIGNvbW1lbnQ6IG1pbmlzaWduIHB1YmxpYyBrZXk6IDI3OEU3NjI3Rjg0MkQ4M0YKUldRLzJFTDRKM2FPSjVjR0Z3QXZNaWFLTGxzQnRwRHZJdTljYlpkRUFmN0hFY1VhVVJUM3B3SjcK",
+      "endpoints": [
+        "https://gist.githubusercontent.com/Tosvng/8a1348b4fbcbedb7acfce7b6783dc77b/raw/latest.json"
+      ]
+    }
   }
 }

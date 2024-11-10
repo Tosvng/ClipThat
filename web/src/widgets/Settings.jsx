@@ -21,10 +21,12 @@ const Settings = () => {
           <Label htmlFor="video">Upload Video</Label>
           <Input id="video" type="file" onChange={handleFileChange} />
         </div> */}
-        <Label htmlFor="video">Upload Video</Label>
-        <div className="flex flex-row w-full  items-center gap-1.5 flex-1 border border-gray-200 p-1">
-          <Button onClick={handleSelectFile}>Upload your Video</Button>
-          {filePath ? <p> {filePath} </p> : <p>Choose your file </p>}
+        <div>
+          <Label htmlFor="video">Upload Video</Label>
+          <div className="flex flex-row w-full  items-center gap-1.5 flex-1 border border-gray-200 p-1">
+            <Button onClick={handleSelectFile}>Upload your Video</Button>
+            {filePath ? <p> {filePath} </p> : <p>Choose your file </p>}
+          </div>
         </div>
         <div className="grid w-full  items-center gap-1.5 flex-1">
           <Label htmlFor="keyword">Keyword</Label>
@@ -36,7 +38,7 @@ const Settings = () => {
             placeholder="Trigger word"
           />
         </div>
-        <Label htmlFor="video">
+        {/* <Label htmlFor="video">
           Select the folder you want your clipped videos in
         </Label>
         <div className="flex flex-row w-full  items-center gap-1.5 flex-1 border border-gray-200 p-1">
@@ -46,7 +48,7 @@ const Settings = () => {
           ) : (
             <p>Choose your folder </p>
           )}
-        </div>
+        </div> */}
       </div>
       <Button onClick={generateClips}>Generate</Button>
     </>

@@ -11,8 +11,9 @@ const useSettingsHook = () => {
   const [destinationPath, setDestinationPath] = useState("");
   const [keyword, setKeyword] = useState("");
   const { selectFolder, createFolder } = useFolderHook();
-  const { selectFile, checkIfFileExists, createFile, readFile } = useFileHook();
-  const CLIP_THAT_FOLDER = "Clip_That";
+  const { selectFile, checkIfFileExists, createFile, readTextFile } =
+    useFileHook();
+  const CLIP_THAT_FOLDER = "Clip-That";
   const CONFIG_FILENAME = "d_config.txt";
 
   // controlled input - keyword
@@ -61,7 +62,7 @@ const useSettingsHook = () => {
   };
 
   const readConfigFile = async (appFolderNumber) => {
-    const fileContent = await readFile({
+    const fileContent = await readTextFile({
       basePath: appFolderNumber,
       filepath: `${CLIP_THAT_FOLDER}/${CONFIG_FILENAME}`,
     });
@@ -96,7 +97,7 @@ const useSettingsHook = () => {
     const appFolderNumber = BaseDirectory.Document; // Tauri number for folder path
     const appFolderExist = await createFolder({
       basePath: appFolderNumber,
-      path: "Clip-That",
+      path: `${CLIP_THAT_FOLDER}`,
     });
     await createFolder({
       basePath: appFolderNumber,
