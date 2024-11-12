@@ -60,7 +60,7 @@
               "validator": "[\\s\\S]*"
             }
           ],
-          "name": "C:/Users/altos/Documents/ClipThat/dist/clip_that_script",
+          "name": "./binaries/clip_that_script",
           "sidecar": true
         }
       ]

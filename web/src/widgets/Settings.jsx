@@ -1,6 +1,8 @@
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
+import { Terminal } from "lucide-react";
+import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 import useSettingsHook from "../hooks/useSettingsHook.jsx";
 
 const Settings = () => {
@@ -12,6 +14,8 @@ const Settings = () => {
     handleKeywordChange,
     changeDestinationPath,
     generateClips,
+    isGenerating,
+    info,
   } = useSettingsHook();
 
   return (
@@ -51,6 +55,14 @@ const Settings = () => {
         </div> */}
       </div>
       <Button onClick={generateClips}>Generate</Button>
+      {isGenerating && <p>Generating clips. This might take a while</p>}
+      {!isGenerating && info && (
+        <Alert>
+          <Terminal className="m-8 h-4 w-4" />
+
+          <AlertDescription>{info}</AlertDescription>
+        </Alert>
+      )}
     </>
   );
 };

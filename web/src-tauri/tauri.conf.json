@@ -1,7 +1,7 @@
 {
   "$schema": "../node_modules/@tauri-apps/cli/config.schema.json",
   "productName": "clip-that",
-  "version": "0.2.1",
+  "version": "0.2.2",
   "identifier": "com.example.tauri",
   "build": {
     "frontendDist": "../dist",
@@ -27,7 +27,7 @@
     "active": true,
     "createUpdaterArtifacts": true,
     "targets": "all",
-    "externalBin": ["C:/Users/altos/Documents/ClipThat/dist/clip_that_script"],
+    "externalBin": ["./binaries/clip_that_script"],
     "icon": [
       "icons/32x32.png",
       "icons/128x128.png",

@@ -10,6 +10,8 @@ const useSettingsHook = () => {
   const [filePath, setFilePath] = useState("");
   const [destinationPath, setDestinationPath] = useState("");
   const [keyword, setKeyword] = useState("");
+  const [isGenerating, setIsGenerating] = useState(false);
+  const [info, setInfo] = useState("");
   const { selectFolder, createFolder } = useFolderHook();
   const { selectFile, checkIfFileExists, createFile, readTextFile } =
     useFileHook();
@@ -35,16 +37,27 @@ const useSettingsHook = () => {
 
   // Call python to process video
   const generateClips = async () => {
-    const command = Command.sidecar(
-      "C:/Users/altos/Documents/ClipThat/dist/clip_that_script",
-      [keyword, filePath, destinationPath]
-    );
+    setIsGenerating(true);
+    console.log(keyword, filePath, destinationPath);
+    const command = Command.sidecar("./binaries/clip_that_script", [
+      keyword,
+      filePath,
+      destinationPath,
+    ]);
     const output = await command.execute();
     if (output.code === 0) {
       console.log("success", output.stdout);
+      setInfo(
+        `Clip generation complete. You can find your clips at ${destinationPath}`
+      );
     } else {
       console.log("error", output.stderr);
+      setInfo(`An Error occurred while generating clips ${output.stderr}`);
     }
+    setIsGenerating(false);
+    setTimeout(() => {
+      setInfo("");
+    }, 5000);
   };
 
   const createDefaultConfigFile = async (appFolderNumber) => {
@@ -105,7 +118,9 @@ const useSettingsHook = () => {
     });
     if (appFolderExist) {
       // Set destination path
-      setDestinationPath(await readDestPathFromConfigFile(appFolderNumber));
+      let config_path = await documentDir();
+      config_path += `\\${CLIP_THAT_FOLDER}\\clips`;
+      setDestinationPath(config_path);
     }
   };
 
@@ -121,6 +136,8 @@ const useSettingsHook = () => {
     handleKeywordChange,
     changeDestinationPath,
     generateClips,
+    isGenerating,
+    info,
   };
 };
 
