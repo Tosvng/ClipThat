@@ -26,6 +26,7 @@ networkx==3.4.1
 numba==0.60.0
 numpy==2.0.2
 openai-whisper==20240930
+opencv-python==4.10.0.84
 packaging==24.1
 pefile==2023.2.7
 pillow==11.0.0
@@ -38,6 +39,7 @@ pyparsing==3.2.0
 pywin32-ctypes==0.2.3
 regex==2024.9.11
 requests==2.32.3
+six==1.16.0
 srt==3.5.3
 sympy==1.13.1
 tiktoken==0.8.0
@@ -48,5 +50,6 @@ urllib3==2.2.3
 vosk==0.3.45
 websockets==13.1
 whichcraft==0.6.1
+whisper==1.1.10
 zope.event==5.0
 zope.interface==7.1.0

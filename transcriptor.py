@@ -3,17 +3,14 @@
 import os
 import tempfile
 import moviepy.editor as mp
+from moviepy.video.fx.all import resize, margin
 
 
 class Transcriptor:
     """Generate text from video"""
 
     def __init__(self, model) -> None:
-        # self.assets_dir = tempfile.mkdtemp()
-        # print("init", self.assets_dir)
-        # whisper.load_model("base", download_root=self.assets_dir)
         self.model = model
-        pass
 
     def extract_audio(self, video: str) -> tuple[str, float]:
         """Function to extract audio from video and process in memory"""
@@ -69,10 +66,31 @@ class Transcriptor:
             clip_count (int, optional): For naming the clip. Defaults to 1.
         """
         clip = mp.VideoFileClip(video_path)
+
         clip_start_time = max(0, start_time - clip_length)
         subclip: mp.VideoClip = clip.subclip(clip_start_time, start_time)
+        subclip = self.resize_clip(subclip)
+
         output_clip = f"{dest_path}/clip_{clip_count}.mp4"
-        subclip.write_videofile(output_clip, codec="libx264")
+        subclip.write_videofile(
+            output_clip,
+            codec="libx264",
+            temp_audiofile=os.path.normpath(f"{dest_path}\\temp.mp3"),
+        )
+
+    def resize_clip(
+        self, clip: mp.VideoClip, aspect_ratio=(1080, 1920)
+    ) -> mp.VideoClip:
+        """Resize a clip to the specified aspect_ratio
+
+        Args:
+            clip mp.VideoClip: video that needs to be resized
+            aspect_ratio float: new aspect ration
+
+        Returns a resized mp.VideoClip clip
+        """
+        new_clip = clip.resize(aspect_ratio)
+        return new_clip
 
     def detect_keyword_and_extract_clips(
         self,
@@ -86,6 +104,8 @@ class Transcriptor:
             vid_path (str): path to the video
             keyword (str): the keyword to look for
         """
+        os.environ["TEMP_DIR"] = dest_path
+
         audio_file_path, _ = self.extract_audio(vid_path)
         print("detect_keyword_and_extract_clips", audio_file_path)
         keyword_ts = self.detect_keyword_in_audio(audio_file_path, keyword)
@@ -99,7 +119,3 @@ class Transcriptor:
                 clip_count=i + 1,
             )
         os.remove(audio_file_path)
-
-
-# t = Transcriptor()
-# t.detect_keyword_and_extract_clips("C:/Users/altos/Videos/Captures/test.mp4", "so")

@@ -44,6 +44,10 @@
       "identifier": "fs:allow-app-read-recursive",
       "allow": [{ "path": "$DOCUMENT/Clip-That" }]
     },
+    {
+      "identifier": "fs:allow-watch",
+      "allow": [{ "path": "$DOCUMENT/Clip-That/*" }]
+    },
     "shell:allow-open",
     {
       "identifier": "shell:allow-execute",

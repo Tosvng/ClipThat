@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { Command } from "@tauri-apps/plugin-shell";
 import { BaseDirectory } from "@tauri-apps/plugin-fs";
 import { documentDir } from "@tauri-apps/api/path";
-
+import { getCurrentWebview } from "@tauri-apps/api/webview";
 import useFolderHook from "./useFolderHook";
 import useFileHook from "./useFileHook";
 
@@ -33,6 +33,18 @@ const useSettingsHook = () => {
     const folder = await selectFolder();
     setDestinationPath(folder);
     // write it to app data
+  };
+  // File drop listener
+  const handleDrop = async (event) => {
+    const unlisten = await getCurrentWebview().onDragDropEvent((event) => {
+      if (event.payload.type === "drop") {
+        // console.log("User dropped", event.payload.paths);
+        setFilePath(event.payload.paths[0]);
+      }
+    });
+
+    // you need to call unlisten if your handler goes out of scope e.g. the component is unmounted
+    // unlisten();
   };
 
   // Call python to process video
@@ -138,6 +150,7 @@ const useSettingsHook = () => {
     generateClips,
     isGenerating,
     info,
+    handleDrop,
   };
 };
 
