@@ -24,6 +24,7 @@ const ClipVideoPage = () => {
         <div
           className="border-2 border-dashed border-gray-300 rounded-xs p-8 text-center cursor-pointer"
           onClick={handleSelectFile}
+          data-testid="file-upload-area"
         >
           <Upload className="mx-auto h-12 w-12 text-gray-400" />
           <p className="mt-2 text-sm text-gray-600">

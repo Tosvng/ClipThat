@@ -40,7 +40,7 @@ function App() {
   }
   checkForAppUpdates(false);
   return (
-    <div className="">
+    <div className="min-h-screen">
       <section className="bg-center bg-no-repeat bg-[url('https://flowbite.s3.amazonaws.com/docs/jumbotron/conference.jpg')] bg-gray-700 bg-blend-multiply p-4">
         <div className="px-4 mx-auto max-w-screen-xl text-center py-4">
           <h1 className="text-center mb-4 text-4xl font-semibold tracking-tight leading-none text-gray-50 md:text-5xl lg:text-6xl ">
@@ -48,7 +48,7 @@ function App() {
           </h1>
         </div>
       </section>
-      <div className="max-w-4xl mx-auto p-8 space-y-8">
+      <div className="max-w-4xl mx-auto p-2 space-y-8">
         {/* <Instructions /> */}
         <TabLayout />
         {/* <ClipsCarousel /> */}

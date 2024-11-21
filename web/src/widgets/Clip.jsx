@@ -1,11 +1,11 @@
 /* eslint-disable react/prop-types */
 import { AspectRatio } from "@/components/ui/aspect-ratio";
-import useFileHook from "../hooks/useFileHook";
 import { useEffect, useRef, useState } from "react";
 import { documentDir, join } from "@tauri-apps/api/path";
 import { convertFileSrc } from "@tauri-apps/api/core";
 import { CirclePlay, Play, Upload } from "lucide-react";
 import { Button } from "@/components/ui/button";
+// import YouTubeUploader from "./YouTubeUploader";
 
 const Clip = ({ videoName }) => {
   const videoRef = useRef(null);
@@ -33,7 +33,7 @@ const Clip = ({ videoName }) => {
   }, [assetUrl]);
 
   return (
-    <div className="p-4">
+    <div className="w-full">
       <div className="flex flex-row gap-2 items-center justify-center">
         <h3 className="font-normal text-gray-700">{videoName}</h3>
       </div>
@@ -42,15 +42,11 @@ const Clip = ({ videoName }) => {
           ref={videoRef}
           className="h-full w-full rounded-sm"
           controls
+          playsInline
+          controlsList={window.innerWidth < 768 ? "nofullscreen" : ""}
         ></video>
       </AspectRatio>
-      <div className="p-4 rounded-xs flex items-center justify-between w-full">
-        {/* <Button variant="outline" size="sm" className="rounded-xs">
-          Upload to YouTube
-          <Upload className="h-4 w-4" />
-          <span className="sr-only">Upload to YouTube</span>
-        </Button> */}
-      </div>
+      {/* <YouTubeUploader videoFile={video} /> */}
     </div>
   );
 };
