@@ -1,7 +1,7 @@
 {
   "$schema": "../node_modules/@tauri-apps/cli/config.schema.json",
   "productName": "clip-that",
-  "version": "0.2.3",
+  "version": "2.3.0",
   "identifier": "com.example.tauri",
   "build": {
     "frontendDist": "../dist",
