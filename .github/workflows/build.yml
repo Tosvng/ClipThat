@@ -25,6 +25,9 @@ jobs:
         run: |
           brew install portaudio
           brew install ffmpeg
+          FFMPEG_PATH=$(which ffmpeg)
+          echo "Found ffmpeg at: $FFMPEG_PATH"
+          echo "FFMPEG_PATH=$FFMPEG_PATH" >> $GITHUB_ENV
 
       - name: Install dependencies
         run: |
