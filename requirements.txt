@@ -28,7 +28,7 @@ openai-whisper==20240930
 opencv-python==4.10.0.84
 packaging==24.1
 pefile==2023.2.7
-pillow==11.0.0
+pillow
 proglog==0.1.10
 PyAudio==0.2.14
 pycparser==2.22
