@@ -29,7 +29,7 @@ openai-whisper==20240930
 opencv-python==4.10.0.84
 packaging==24.1
 pefile==2023.2.7
-pillow==10.4.0
+pillow==11.0.0
 proglog==0.1.10
 PyAudio==0.2.14
 pycparser==2.22
@@ -48,7 +48,7 @@ torch==2.5.0
 tqdm==4.66.5
 typing_extensions==4.12.2
 urllib3==2.2.3
-vosk==0.3.45
+vosk==0.3.44
 websockets==13.1
 whichcraft==0.6.1
 whisper==1.1.10
