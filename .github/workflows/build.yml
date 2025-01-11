@@ -36,7 +36,7 @@ jobs:
       - name: Build macOS Executable
         run: |
           pyinstaller --onefile --name clip_that_script-x86_64-apple-darwin \
-          --add-data "/usr/local/bin/ffmpeg:bin" \
+          --add-data "${{ env.FFMPEG_PATH }}:bin" \
           --add-data "${{ env.pythonLocation }}/lib/python${{ matrix.python-version }}/site-packages/whisper:whisper/" \
           --recursive-copy-metadata "openai-whisper" \
           clip_that_script.py
