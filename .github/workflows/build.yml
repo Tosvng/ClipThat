@@ -1,0 +1,47 @@
+name: Build Mac Executable
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  build:
+    runs-on: macos-latest
+    strategy:
+      matrix:
+        python-version: ["3.11"]
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: ${{ matrix.python-version }}
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install pyinstaller
+          pip install openai-whisper
+          pip install -r requirements.txt
+
+      - name: Install ffmpeg
+        run: |
+          brew install ffmpeg
+
+      - name: Build macOS Executable
+        run: |
+          pyinstaller --onefile --name clip_that_script-x86_64-apple-darwin \
+          --add-data "/usr/local/bin/ffmpeg:bin" \
+          --add-data "${{ env.pythonLocation }}/lib/python${{ matrix.python-version }}/site-packages/whisper:whisper/" \
+          --recursive-copy-metadata "openai-whisper" \
+          clip_that_script.py
+
+      - name: Upload artifacts
+        uses: actions/upload-artifact@v2
+        with:
+          name: clip_that_script-macos
+          path: dist/*
