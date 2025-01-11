@@ -31,7 +31,7 @@ const SignInPage = () => {
         navigate("/subscription");
       }
     } catch (error) {
-      setError("Invalid email or password");
+      setError(`Invalid email or password ${error}`);
       console.error(error);
     }
   };
@@ -48,8 +48,8 @@ const SignInPage = () => {
           </div>
         )}
         <div className="space-y-4">
-          <GoogleAuthButton />
-          <div className="relative">
+          {/* <GoogleAuthButton /> */}
+          {/* <div className="relative">
             <div className="absolute inset-0 flex items-center">
               <span className="w-full border-t" />
             </div>
@@ -58,7 +58,7 @@ const SignInPage = () => {
                 Or continue with
               </span>
             </div>
-          </div>
+          </div> */}
           <form onSubmit={handleLogin} className="space-y-4">
             <div>
               <Input

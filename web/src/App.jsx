@@ -7,6 +7,9 @@ import { ask, message } from "@tauri-apps/plugin-dialog";
 import { relaunch } from "@tauri-apps/plugin-process";
 import TabLayout from "./layout/TabLayout";
 import ProtectedRoute from "./widgets/ProtectedRoute";
+import TitleBar from "./components/TitleBar";
+import MenuBar from "./components/MenuBar";
+import StatusBar from "./components/StatusBar";
 // Import your other components
 
 function App() {
@@ -48,23 +51,30 @@ function App() {
   }
   checkForAppUpdates(false);
   return (
-    <BrowserRouter>
-      <Routes>
-        <Route path="/" element={<SignInPage />} />
-        <Route path="/signup" element={<SignUpPage />} />
-        <Route path="/subscription" element={<SubscriptionPage />} />
-        {/* Protect your feature routes */}
-        <Route
-          path="/app"
-          element={
-            <ProtectedRoute>
-              <TabLayout />
-            </ProtectedRoute>
-          }
-        />
-        {/* Add more protected routes as needed */}
-      </Routes>
-    </BrowserRouter>
+    <div className="flex flex-col h-screen">
+      <TitleBar />
+      {/* <MenuBar /> */}
+      <div className="flex-1 overflow-hidden">
+        <BrowserRouter>
+          <Routes>
+            <Route path="/" element={<SignInPage />} />
+            <Route path="/signup" element={<SignUpPage />} />
+            <Route path="/subscription" element={<SubscriptionPage />} />
+            {/* Protect your feature routes */}
+            <Route
+              path="/app"
+              element={
+                <ProtectedRoute>
+                  <TabLayout />
+                </ProtectedRoute>
+              }
+            />
+            {/* Add more protected routes as needed */}
+          </Routes>
+        </BrowserRouter>
+      </div>
+      <StatusBar />
+    </div>
   );
 }
 
