@@ -1,6 +1,5 @@
 import { Button } from "@/components/ui/button";
 import { auth } from "../lib/firebase";
-import { useNavigate } from "react-router-dom";
 import { updateSubscriptionStatus } from "../lib/firebase_utils";
 import {
   AlertDialog,
@@ -15,10 +14,9 @@ import {
 } from "@/components/ui/alert-dialog";
 import { doc, getDoc } from "firebase/firestore";
 import { db } from "../lib/firebase";
+import { open } from "@tauri-apps/plugin-shell";
 
 const UnsubscribeButton = () => {
-  const navigate = useNavigate();
-
   const handleUnsubscribe = async () => {
     try {
       if (!auth.currentUser) {
@@ -26,21 +24,25 @@ const UnsubscribeButton = () => {
         return;
       }
 
-      // Get current subscription data to keep the expiration date
+      // Get current subscription data
       const userDoc = await getDoc(doc(db, "users", auth.currentUser.uid));
-      const currentExpiryDate = userDoc.data()?.subscription?.expiresAt;
+      const stripeCustomerId = userDoc.data()?.subscription?.stripeCustomerId;
 
-      await updateSubscriptionStatus(auth.currentUser.uid, {
-        isActive: false,
-        expiresAt: currentExpiryDate, // Keep the current expiry date
-        canceledAt: new Date().toISOString(), // Add cancellation date
-        autoRenew: false, // Add flag to prevent renewal
+      if (!stripeCustomerId) {
+        console.error("No Stripe customer ID found");
+        return;
+      }
+
+      // Open Stripe Customer Portal
+      const portalUrl = `${
+        import.meta.env.VITE_STRIPE_CUSTOMER_PORTAL_URL
+      }?customer=${stripeCustomerId}`;
+      await open(portalUrl).catch((error) => {
+        console.error("Failed to open URL:", error);
+        window.open(portalUrl, "_blank");
       });
-
-      // Don't navigate away - let them continue using the app
-      // Just close the dialog
     } catch (error) {
-      console.error("Unsubscribe error:", error);
+      console.error("Error opening customer portal:", error);
     }
   };
 
@@ -51,29 +53,30 @@ const UnsubscribeButton = () => {
           variant="outline"
           className="border-gold/50 text-gold hover:border-gold hover:bg-gold/10 transition-all duration-300"
         >
-          Cancel Subscription
+          Manage Subscription
         </Button>
       </AlertDialogTrigger>
       <AlertDialogContent className="bg-charcoal border border-gold/20">
         <AlertDialogHeader>
           <AlertDialogTitle className="text-gold text-xl">
-            Cancel Subscription?
+            Manage Your Subscription
           </AlertDialogTitle>
           <AlertDialogDescription className="text-cream/80">
-            Your subscription will be cancelled but you'll maintain access to
-            all features until your current subscription period ends. After
-            that, you'll need to resubscribe to regain access.
+            You&apos;ll be redirected to the Stripe Customer Portal where you
+            can manage your subscription, including cancellation. If you cancel,
+            you&apos;ll maintain access until the end of your current billing
+            period.
           </AlertDialogDescription>
         </AlertDialogHeader>
         <AlertDialogFooter>
           <AlertDialogCancel className="hover:bg-gold/10 border-gold/50 text-cream">
-            Keep Subscription
+            Close
           </AlertDialogCancel>
           <AlertDialogAction
             onClick={handleUnsubscribe}
             className="bg-gold text-charcoal hover:bg-darkGold"
           >
-            Cancel Subscription
+            Continue to Portal
           </AlertDialogAction>
         </AlertDialogFooter>
       </AlertDialogContent>

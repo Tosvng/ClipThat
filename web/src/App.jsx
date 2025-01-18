@@ -10,6 +10,7 @@ import ProtectedRoute from "./widgets/ProtectedRoute";
 import TitleBar from "./components/TitleBar";
 import MenuBar from "./components/MenuBar";
 import StatusBar from "./components/StatusBar";
+import { Toaster } from "sonner";
 // Import your other components
 
 function App() {
@@ -52,6 +53,7 @@ function App() {
   checkForAppUpdates(false);
   return (
     <div className="flex flex-col h-screen">
+      <Toaster richColors position="top-right" />
       <TitleBar />
       {/* <MenuBar /> */}
       <div className="flex-1 overflow-hidden">

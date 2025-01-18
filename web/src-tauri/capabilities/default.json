@@ -44,6 +44,10 @@
       "allow": [{ "path": "$DOCUMENT/Clip-That/*" }]
     },
     {
+      "identifier": "fs:allow-remove",
+      "allow": [{ "path": "$DOCUMENT/Clip-That/clips/*" }]
+    },
+    {
       "identifier": "fs:read-all",
       "allow": [{ "path": "$DOCUMENT/Clip-That/*" }]
     },

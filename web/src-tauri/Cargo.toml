@@ -1,6 +1,6 @@
 [package]
 name = "app"
-version = "3.0.0"
+version = "3.2.0"
 description = "An app for making short clips out of a long video"
 authors = ["you"]
 license = ""
