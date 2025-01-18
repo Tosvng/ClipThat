@@ -20,6 +20,14 @@ jobs:
         uses: actions/setup-python@v5
         with:
           python-version: ${{ matrix.python-version }}
+      
+      - name: Install system dependencies
+        run: |
+          brew install portaudio
+          brew install ffmpeg
+          FFMPEG_PATH=$(which ffmpeg)
+          echo "Found ffmpeg at: $FFMPEG_PATH"
+          echo "FFMPEG_PATH=$FFMPEG_PATH" >> $GITHUB_ENV
 
       - name: Install dependencies
         run: |
@@ -28,14 +36,10 @@ jobs:
           pip install openai-whisper
           pip install -r requirements.txt
 
-      - name: Install ffmpeg
-        run: |
-          brew install ffmpeg
-
       - name: Build macOS Executable
         run: |
           pyinstaller --onefile --name clip_that_script-x86_64-apple-darwin \
-          --add-data "/usr/local/bin/ffmpeg:bin" \
+          --add-data "${{ env.FFMPEG_PATH }}:bin" \
           --add-data "${{ env.pythonLocation }}/lib/python${{ matrix.python-version }}/site-packages/whisper:whisper/" \
           --recursive-copy-metadata "openai-whisper" \
           clip_that_script.py
